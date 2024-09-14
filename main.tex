@@ -1,0 +1,72 @@
+\documentclass[a4paper,11pt,landscape,twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage[spanish]{babel}
+
+% Aumenta la separación entre columnas
+\setlength{\columnsep}{25pt}
+
+\geometry{left=20mm,right=20mm,top=20mm,bottom=20mm}
+
+% Configuración del código en C++
+\lstset{
+  language=C++,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  tabsize=4,
+  showspaces=false,
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  columns=flexible
+}
+
+\title{Ayudamemoria}
+\author{My Room Is Random Sorted}
+
+\begin{document}
+
+\begin{center}
+    \LARGE\textbf{Ayudamemoria}\\[1em]
+    \large My room is random Sorted\\[1em]
+    \normalsize \today\\[1em]
+\end{center}
+
+\tableofcontents
+
+\section{Estructuras de datos}
+
+\subsection{Fenwick Tree}
+
+\lstinputlisting{fenwick.cpp}
+
+\subsection{Tabla Aditiva}
+
+\lstinputlisting{tablitaAditiva.cpp}
+
+\section{Geometria}
+
+\lstinputlisting{geometria.cpp}
+
+\section{Template}
+
+\lstinputlisting{template.cpp}
+
+\section{Otros}
+
+\subsection{Fijar el numero de decimales}
+
+\lstinputlisting{decimales.cpp}
+
+\end{document}
