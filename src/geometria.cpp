@@ -66,13 +66,11 @@ double dist(const Point &a, const Point &b) {
     return (a - b).norm(); }
 
 bool in_segment(const Point &p, const Point &b, const Point &c) {
-    return fabs(dist_sq(p, b) + dist_sq(p, c) - dist_sq(b, c)) < EPS;
-}
+    return fabs(dist_sq(p, b) + dist_sq(p, c) - dist_sq(b, c)) < EPS; }
 
 double angle(const Point &a, const Point &m, const Point &b) {
     Point ma = a - m, mb = b - m;
-    return atan2(ma ^ mb, ma * mb);
-}
+    return atan2(ma ^ mb, ma * mb); }
 
 void sweep_space() {
     vector<Event> eventos; // puntos, segmentos, ...
@@ -82,5 +80,17 @@ void sweep_space() {
         Event &e = eventos[i];
         process(e, estado); // procesar un evento cambia el estado
         ans = actualizar(ans);
-    }
-}
+} }
+
+vector<pt> minkowski_sum(vector<pt> p, vector<pt> q){
+	int n=SZ(p),m=SZ(q),x=0,y=0;
+	fore(i,0,n) if(p[i]<p[x]) x=i;
+	fore(i,0,m) if(q[i]<q[y]) y=i;
+	vector<pt> ans={p[x]+q[y]};
+	fore(it,1,n+m){
+		pt a=p[(x+1)%n]+q[y];
+		pt b=p[x]+q[(y+1)%m];
+		if(b.left(ans.back(),a)) ans.pb(b), y=(y+1)%m;
+		else ans.pb(a), x=(x+1)%n;
+	}
+	return ans; }
