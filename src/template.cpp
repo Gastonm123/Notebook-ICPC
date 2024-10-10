@@ -10,7 +10,6 @@ using namespace std;
 #define pb push_back
 #define fst first
 #define snd second
-#define mid(a,b) ((a+b)>>1)
 #define mp make_pair
 #define all(v) begin(v),end(v)
 #define endl '\n'

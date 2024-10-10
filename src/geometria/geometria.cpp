@@ -70,7 +70,7 @@ bool in_segment(const Point &p, const Point &b, const Point &c) {
 
 double angle(const Point &a, const Point &m, const Point &b) {
     Point ma = a - m, mb = b - m;
-    return atan2(ma ^ mb, ma * mb); }
+    return atan2(ma ^ mb, ma * mb);} //atan2l
 
 void sweep_space() {
     vector<Event> eventos; // puntos, segmentos, ...
