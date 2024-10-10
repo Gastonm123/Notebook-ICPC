@@ -1,48 +1,56 @@
-struct Fenwick {
-    static const int sz = 1<<11;
-    ll t[sz];
-    void adjust(ll v, int p) {
-        for (int i=p; i<sz; i+=(i&-i)) t[i]+=v;  }
-    ll sum(int p){
-        ll s=0;
-        for(int i=p; i; i-=(i&-i)) s+=t[i];
+struct Fenwick{
+    static const int sz=1<<K;
+    ll t[sz]={};
+    void adjust(int p, ll v){
+        for(int i=p+1;i<sz;i+=(i&-i)) t[i]+=v;
+    }
+    ll sum(int p){ // suma [0,p)
+        ll s = 0;
+        for(int i=p;i;i-=(i&-i)) s+=t[i];
         return s;
     }
-    ll sum(int a, int b) {return sum(b)-sum(a-1);}
-};
+    ll sum(int a, int b){return sum(b)-sum(a);} // suma [a,b)
 
-struct RangeFenwick {
-    Fenwick add;
-    Fenwick sub;
-    void adjust(ll v, int a, int b) {
-        add.adjust(v,a);
-        add.adjust(-v,b+1);
-        sub.adjust((a-1)*v,a);
-        sub.adjust(-b*v,b+1);
-    }
-    ll sum(int p) {
-        return 1ll * p * add.sum(p) - sub.sum(p);
-    }
-    ll sum(int a, int b) {
-        return sum(b) - sum(a-1);
+    //funciona solo con valores no negativos en el fenwick
+    //longitud del minimo prefijo t.q. suma <= x
+    //para el maximo v+1 y restar 1 al resultado
+    int pref(ll v){
+        int x = 0;
+        for(int d = 1<<(K-1); d; d>>=1){
+            if( t[x|d] < v ){
+                x |= d;
+                v -= t[x];
+            }
+        }
+        return x+1;
     }
 };
 
-struct Fenwick2D {
-    static const int sz=(1<<10);
-    Fenwick t[sz];
-    void adjust(int x, int y, ll v) {
-        for (int i=x; i<sz; i+=(i&-i)) t[i].adjust(y,v);}
-    ll sum(int x, int y) {
-        ll s=0;
-        for (int i=x; i; i-=(i&-i)) s += t[i].sum(y);
+struct RangeFT { // 0-indexed, query [0, i), update [l, r)
+	Fenwick rate, err;
+	void adjust(int l, int r, int x) { // range update
+		rate.adjust(l, x); rate.adjust(r, -x); err.adjust(l, -x*l); err.adjust(r, x*r); }
+	ll sum(int i) { return rate.sum(i) * i + err.sum(i); } }; // prefix query
+
+
+struct Fenwick2D{
+    ll t[N][M]={};
+    void adjust(int p, int q, ll v){
+        for(int i=p+1;i<N;i+=(i&-i)) 
+            for(int j= q+1; j<M; j+=(j&-j))
+                t[i][j]+=v;
+    }
+    ll sum(int p,int q){ // suma [0,p)
+        ll s = 0;
+        for(int i=p;i;i-=(i&-i)) 
+            for(int j=q; j; j-=(j&-j))
+                s+=t[i][j];
         return s;
     }
-    ll sum(int x1, int y1, int x2, int y2) {
-        ll s = sum(x2,y2)
-             + ((x1>1) ? -sum(x1-1,y2) : 0)
-             + ((y1>1) ? -sum(x2,y1-1) : 0)
-             + ((x1>1&&y1>1) ? sum(x1-1,y1-1) : 0);
-        return s;
-    }
+    ll sum(int x1, int y1, int x2, int y2){return sum(x2,y2)-sum(x1,y2)-sum(x2,y1)+sum(x1,y1);} // suma [a,b)
 };
+
+
+
+
+
