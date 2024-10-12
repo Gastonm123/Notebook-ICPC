@@ -5,7 +5,6 @@ struct Dinic{
 	vector<vector<edge>> g;
 	Dinic(int x):nodes(x),g(x),dist(x),q(x),work(x){}
 	void add_edge(int s, int t, ll cap){
-        //dprint(s); dprint(t); dprint(cap);
 		g[s].pb((edge){t,sz(g[t]),0,cap});
 		g[t].pb((edge){s,sz(g[s])-1,0,0});
 	}
