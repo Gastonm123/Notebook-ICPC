@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-
 #define forr(i, a, b) for (int i = int(a); i < int(b); i++)
 #define forn(i, n) forr(i,0,n)
 #define dforr(i, a, b) for (int i = int(b)-1; i >= int(a); i--)

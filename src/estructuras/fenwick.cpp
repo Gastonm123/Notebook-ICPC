@@ -17,10 +17,7 @@ struct Fenwick{
     int pref(ll v){
         int x = 0;
         for(int d = 1<<(K-1); d; d>>=1){
-            if( t[x|d] < v ){
-                x |= d;
-                v -= t[x];
-            }
+            if( t[x|d] < v ) x |= d, v -= t[x];
         }
         return x+1;
     }
@@ -29,8 +26,11 @@ struct Fenwick{
 struct RangeFT { // 0-indexed, query [0, i), update [l, r)
 	Fenwick rate, err;
 	void adjust(int l, int r, int x) { // range update
-		rate.adjust(l, x); rate.adjust(r, -x); err.adjust(l, -x*l); err.adjust(r, x*r); }
-	ll sum(int i) { return rate.sum(i) * i + err.sum(i); } }; // prefix query
+		rate.adjust(l, x); rate.adjust(r, -x); 
+        err.adjust(l, -x*l); err.adjust(r, x*r); 
+    }
+	ll sum(int i) { return rate.sum(i) * i + err.sum(i); }
+}; // prefix query
 
 
 struct Fenwick2D{
@@ -47,7 +47,9 @@ struct Fenwick2D{
                 s+=t[i][j];
         return s;
     }
-    ll sum(int x1, int y1, int x2, int y2){return sum(x2,y2)-sum(x1,y2)-sum(x2,y1)+sum(x1,y1);} // suma [a,b)
+    ll sum(int x1, int y1, int x2, int y2){
+        return sum(x2,y2)-sum(x1,y2)-sum(x2,y1)+sum(x1,y1);
+    } // suma [a,b)
 };
 
 
