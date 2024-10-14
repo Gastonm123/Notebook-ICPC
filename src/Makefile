@@ -1,4 +1,2 @@
-CC = g++
-CXXFLAGS = -Wall -g \
--fsanitize=undefined -fsanitize=bounds \
--std=c++2a -O2
+CXXFLAGS = -std=gnu++2a -O2 -g -Wall -Wextra -Wshadow -Wconversion \
+-fsanitize=address -fsanitize=undefined

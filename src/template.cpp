@@ -3,7 +3,7 @@
 using namespace std;
 
 #define forr(i, a, b) for (int i = int(a); i < int(b); i++)
-#define forn(i, n) forr(i, 0, n)
+#define forn(i, n) forr(i,0,n)
 #define dforr(i, a, b) for (int i = int(b)-1; i >= int(a); i--)
 #define dforn(i, n) dforr(i,0,n)
 #define all(v) begin(v),end(v)
@@ -13,7 +13,7 @@ using namespace std;
 #define snd second
 #define mp make_pair
 #define endl '\n'
-#define dprint(v) cout << #v "=" << v << endl
+#define dprint(v) cout << #v " = " << v << endl
 
 typedef long long ll;
 typedef pair<int, int> pii;
