@@ -19,4 +19,6 @@ typedef pair<int, int> pii;
 int main(int argc, char **argv){
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     if(argc == 2) freopen(argv[1], "r", stdin);
+
+    
 }
