@@ -1,3 +1,5 @@
+%para compilar pdflatex main.text
+
 \documentclass[a4paper,11pt,landscape,twocolumn]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath, amssymb, amsthm}
@@ -97,6 +99,16 @@
 
 \lstinputlisting{src/matematica/phollards_rho.cpp}
 
+\subsection{Divisores}
+
+\lstinputlisting{src/matematica/divisores.cpp}
+
+\subsection{Inversos Modulares}
+
+\lstinputlisting{src/matematica/euclides_extendido.cpp}
+
+\lstinputlisting{src/matematica/inversos_modulares.cpp}
+
 \section{Geometria}
 
 \lstinputlisting{src/geometria/geometria.cpp}
@@ -133,10 +145,32 @@
 
 \lstinputlisting{src/flujo/dinic.cpp}
 
+\subsection{Kuhn}
+
+\lstinputlisting{src/flujo/kuhn.cpp}
+
+\section{Optimización}
+
+\subsection{Ternary Search}
+
+\lstinputlisting{src/optimizacion/ternary_search.cpp}
+
+\subsection{Longest Increasing Subsequence}
+
+\lstinputlisting{src/optimizacion/lis.cpp}
+
 \section{Otros}
 
 \subsection{Fijar el numero de decimales}
 
 \lstinputlisting{src/otros/decimales.cpp}
+
+\subsection{Hash Table (Unordered Map/ Unordered Set)}
+
+\lstinputlisting{src/otros/hash_table.cpp}
+
+\subsection{Indexed Set}
+
+\lstinputlisting{src/otros/indexed_set.cpp}
 
 \end{document}

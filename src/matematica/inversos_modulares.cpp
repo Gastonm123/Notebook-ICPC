@@ -1,4 +1,4 @@
-constexpr ll MOD = 1'000'000'007; // tmb es común 998'244'353
+constexpr ll MOD = 1000000007; // tmb es comun 998'244'353
 ll invmod[MAXN]; // inversos módulo MOD hasta MAXN
 void invmods() { // todo entero en [2,MAXN] debe ser coprimo con MOD
     inv[1] = 1;
