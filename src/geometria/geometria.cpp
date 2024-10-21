@@ -82,15 +82,4 @@ void sweep_space() {
         ans = actualizar(ans);
 } }
 
-vector<pt> minkowski_sum(vector<pt> p, vector<pt> q){
-	int n=SZ(p),m=SZ(q),x=0,y=0;
-	fore(i,0,n) if(p[i]<p[x]) x=i;
-	fore(i,0,m) if(q[i]<q[y]) y=i;
-	vector<pt> ans={p[x]+q[y]};
-	fore(it,1,n+m){
-		pt a=p[(x+1)%n]+q[y];
-		pt b=p[x]+q[(y+1)%m];
-		if(b.left(ans.back(),a)) ans.pb(b), y=(y+1)%m;
-		else ans.pb(a), x=(x+1)%n;
-	}
-	return ans; }
+
