@@ -14,7 +14,7 @@ using namespace std;
 #define snd second
 #define mp make_pair
 #define endl '\n'
-#define dprint(v) cout << #v " = " << v << endl
+#define dprint(v) cerr << #v " = " << v << endl
 
 typedef long long ll;
 typedef pair<int, int> pii;

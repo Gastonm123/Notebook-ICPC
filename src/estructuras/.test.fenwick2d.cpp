@@ -1,7 +1,7 @@
 //https://cses.fi/problemset/result/10807168/
 #include <bits/stdc++.h>
 using namespace std;
-#define dprint(v) cout << #v "=" << v << endl
+#define dprint(v) cerr << #v "=" << v << endl
 #define forr(i, a, b) for (int i = (a); i < (b); i++)
 #define forn(i, n) forr(i, 0, n)
 #define dforn(i, n) for (int i = n - 1; i >= 0; i--)
@@ -22,13 +22,13 @@ const int N = 1001, M =1001;
 struct Fenwick2D{
     ll t[N][M]={};
     void adjust(int p, int q, ll v){
-        for(int i=p+1;i<N;i+=(i&-i)) 
+        for(int i=p+1;i<N;i+=(i&-i))
             for(int j= q+1; j<M; j+=(j&-j))
                 t[i][j]+=v;
     }
     ll sum(int p,int q){ // suma [0,p)
         ll s = 0;
-        for(int i=p;i;i-=(i&-i)) 
+        for(int i=p;i;i-=(i&-i))
             for(int j=q; j; j-=(j&-j))
                 s+=t[i][j];
         return s;
