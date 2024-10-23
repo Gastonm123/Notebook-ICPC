@@ -1,4 +1,4 @@
-//https://cses.fi/problemset/task/1145/
+// https://cses.fi/problemset/task/1145/
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -19,31 +19,34 @@ using namespace std;
 typedef long long ll;
 typedef pair<int, int> pii;
 
-int lis(vector<int> const& a) {
-    int n = a.size();
-    const int INF = 1e9;
-    vector<int> d(n+1, INF);
-    d[0] = -INF;
-    forn(i,n){
-        int l = upper_bound(all(d), a[i]) - d.begin();
-        if (d[l-1] < a[i] && a[i] < d[l])
-            d[l] = a[i];
-    }
-    int ans = 0;
-    for (int l = 0; l <= n; l++) {
-        if (d[l] < INF)
-            ans = l;
-    }
-    return ans;
-}
+constexpr int INF = 1e9+7;
 
+template<class Type> vector<int> lis(vector<Type>& a) {
+    int n = sz(a);
+    vector<int> seq, prev(n,-1), idx(n+1,-1);
+    vector<Type> dp(n+1,INF); dp[0] = -INF;
+    forn(i,n) {
+        int l = int(upper_bound(all(dp),a[i])-begin(dp));
+        if (dp[l-1] == a[i]) continue;
+        prev[i] = idx[l-1], idx[l] = i, dp[l] = a[i];
+    }
+    dforn(i,n+1) {
+        if (dp[i] < INF) {
+            for (int k = idx[i]; k >= 0; k = prev[k]) seq.pb(k);
+            reverse(all(seq));
+            break;
+        }
+    }
+    return seq;
+}
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0);
-    int n; cin >> n;
-    vector<int> arr;
-    forn(i, n){
-        int ai; cin >> ai; arr.pb(ai);
-    }
-    cout << lis(arr) << endl;
+
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    forn(i, n) cin >> arr[i];
+
+    cout << sz(lis(arr)) << endl;
 }
