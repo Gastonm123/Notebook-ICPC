@@ -21,6 +21,12 @@ struct ln {
 	tipo angle(ln l){return pq.angle(l.pq);}
 	int side(pt r){return has(r)?0:sgn2(pq^(r-p));} // 2D
 	pt proj(pt r){return p+pq*((r-p)*pq/pq.norm2());}
+	pt segclosest(pt r) {
+	   double l2 = pq.norm2();
+	   if(l2==0.) return p;
+	   double t =((r-p)*pq)/l2;
+	   return p+(pq*min(1,max(0,t)));
+	}
 	pt ref(pt r){return proj(r)*2-r;}
 	tipo dist(pt r){return (r-proj(r)).norm();}
 //	tipo dist(ln l){ // only 3D
