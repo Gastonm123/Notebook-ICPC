@@ -111,11 +111,63 @@
 
 \section{Geometria}
 
-\lstinputlisting{src/geometria/geometria.cpp}
+\subsection{Formulas}
 
-\subsection{Lower Envelope}
+\begin{itemize}
+  \item \textbf{Ley de cosenos}: sea un triangulo con lados A, B, C y angulos $\alpha$, $\beta$, $\gamma$ entre A, B y C, respectivamente.
+  $$A^2=B^2+C^2-2*cos(\alpha)$$
+  $$B^2=A^2+C^2-2*cos(\beta)$$
+  $$C^2=A^2+B^2-2*cos(\gamma)$$
+  \item \textbf{Ley de senos}: idem
+  $$\frac{sin(\alpha)}{A}=\frac{sin(\beta)}{B}=\frac{sin(\gamma)}{C}$$
+  \item \textbf{Valor de PI}: $\pi=acos(-1.0)$ o $\pi=4*atan(1.0)$
+  \item \textbf{Longitud de una cuerda}: sea $\alpha$ el angulo descripto por una cuerda de longitud $l$.
+  $$l=\sqrt{2*r^2*(1-cos(\alpha))}$$
+  \item \textbf{Formula de Heron}: sea un triangulo con lados a, b, c y semiperimetro s. El area del triangulo es
+  $$A=\sqrt{s*(s-a)*(s-b)*(s-c)}$$
+  \item \textbf{Teorema de Pick}: sean A, I y B el area de un poligono, la cantidad de puntos con coordenadas enteras dentro del mismo y la cantidad de puntos con coordenadas enteras en el borde del mismo.
+  $$A=I+\frac{B}{2}-1$$
+\end{itemize}
 
-\lstinputlisting{src/geometria/lowerEnvelope.cpp}
+\subsection{Punto}
+
+\lstinputlisting{src/geometria/point.cpp}
+
+\subsection{Linea}
+
+\lstinputlisting{src/geometria/line.cpp}
+
+\subsection{Poligono}
+
+\lstinputlisting{src/geometria/polygon.cpp}
+
+\subsection{Circulo}
+
+\lstinputlisting{src/geometria/circle.cpp}
+
+\subsection{Convex Hull}
+
+\lstinputlisting{src/geometria/convex_hull.cpp}
+
+\subsection{Orden Radial}
+
+\lstinputlisting{src/geometria/radial_sort.cpp}
+
+\subsection{Par de puntos más cercano}
+
+\lstinputlisting{src/geometria/closest_pair.cpp}
+
+\subsection{Arbol KD}
+
+\lstinputlisting{src/geometria/kdtree.cpp}
+
+\subsection{Suma de Minkowski}
+
+\lstinputlisting{src/geometria/minkowski_sum.cpp}
+
+\subsection{Sweep Space}
+
+\lstinputlisting{src/geometria/sweep_space.cpp}
 
 \section{Strings}
 
@@ -147,7 +199,7 @@
 
 \subsection{LCA}
 
-\lstinputlisting{src/grafos/lca.cpp}
+\lstinputlisting{src/grafos/lowest_common_ancestor.cpp}
 
 \subsection{Toposort}
 
@@ -190,5 +242,36 @@
 \subsection{Indexed Set}
 
 \lstinputlisting{src/otros/indexed_set.cpp}
+
+\subsection{Iterar subconjuntos}
+
+\begin{itemize}
+  \item Iterar por todos los subconjuntos de n elementos $O(2^n)$.
+  \begin{lstlisting}
+    for(int bm=0; bm<(1<<n); bm++)
+  \end{lstlisting}
+
+  \item Iterar por cada superconjunto de un subconjunto de n elementos $O(2^n)$.
+  \begin{lstlisting}
+    for(int sbm=~bm; sbm; sbm=(sbm-1)&(~bm)) // super=bm&sbm
+  \end{lstlisting}
+
+  \item Iterar por cada subconjunto de un subconjunto de n elementos $O(2^n)$.
+  \begin{lstlisting}
+    for(int sbm=bm; sbm; sbm=(sbm-1)&bm) // sub=sbm
+  \end{lstlisting}
+
+  \item Para cada subconjunto de n elementos, iterar por cada superconjunto $O(3^n)$.
+  \begin{lstlisting}
+    for(int bm=0; bm<(1<<n); bm++)
+      for(int sbm=~bm; sbm; sbm=(sbm-1)&(~bm)) // super=bm&sbm
+  \end{lstlisting}
+
+  \item Para cada subconjunto de n elementos, iterar por cada subsubconjunto $O(3^n)$.
+  \begin{lstlisting}
+    for(int bm=0; bm<(1<<n); bm++)
+      for(int sbm=bm; sbm; sbm=(sbm-1)&(bm)) // sub=sbm
+  \end{lstlisting}
+\end{itemize}
 
 \end{document}
