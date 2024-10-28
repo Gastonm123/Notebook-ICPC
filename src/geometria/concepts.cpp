@@ -1,6 +1,6 @@
 struct Segment {
     Vector a, b;
-    long double eval() const
+    tipo eval() const
     { // evaluar un segmento en una coordenada x
         assert(a.x != b.x || a.y != b.y);
         Vector a1 = a, b1 = b;

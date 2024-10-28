@@ -22,9 +22,9 @@ struct ln {
 	int side(pt r){return has(r)?0:sgn2(pq^(r-p));} // 2D
 	pt proj(pt r){return p+pq*((r-p)*pq/pq.norm2());}
 	pt segclosest(pt r) {
-	   double l2 = pq.norm2();
+	   tipo l2 = pq.norm2();
 	   if(l2==0.) return p;
-	   double t =((r-p)*pq)/l2;
+	   tipo t =((r-p)*pq)/l2;
 	   return p+(pq*min(1,max(0,t)));
 	}
 	pt ref(pt r){return proj(r)*2-r;}

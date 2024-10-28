@@ -1,4 +1,4 @@
-double INF=8e18+1;
+tipo INF=8e18+1;
 #define dist(a, b) ((a-b).norm_sq())
 bool compy(pt a, pt b) {
     return mp(a.y,a.x)<mp(b.y,b.x); }
@@ -13,7 +13,7 @@ ll closest(vector<pt> &ps, int l, int r) {
         return dist(ps[l], ps[l+1]); }
     int m = (l+r)/2, xm = ps[m].x;
     ll min_dist  = min(closest(ps, l, m),closest(ps, m, r));
-    double delta = sqrt(min_dist);
+    tipo delta = sqrt(min_dist);
     vector<pt> sorted(r-l);
     merge(&ps[l], &ps[m], &ps[m], &ps[r], &sorted[0], compy);
     copy(all(sorted), &ps[l]);

@@ -2,7 +2,7 @@ struct pol {
     int n;vector<pt> p;
 	pol(){}
 	pol(vector<pt> _p){p=_p;n=p.size();}
-    double area() {
+    tipo area() {
         ll a = 0;
         forr (i, 1, sz(p)-1) {
             a += (p[i]-p[0])^(p[i+1]-p[0]);
@@ -14,7 +14,7 @@ struct pol {
 		int cnt=0;
 		forr(i,0,n){
 			int j=(i+1)%n;
-			int k=sgn((q-p[j])%(p[i]-p[j]));
+			int k=sgn((q-p[j])^(p[i]-p[j]));
 			int u=sgn(p[i].y-q.y),v=sgn(p[j].y-q.y);
 			if(k>0&&u<0&&v>=0)cnt++;
 			if(k<0&&v<0&&u>=0)cnt--;
@@ -39,11 +39,10 @@ struct pol {
 		return !q.left(p[a],p[a+1]);
 	}
 	bool isconvex(){//O(N), delete collinear points!
-		int N=sz(p);
-		if(N<3) return false;
+		if(n<3) return false;
 		bool isLeft=p[0].left(p[1], p[2]);
-		forr(i, 1, N)
-			if(p[i].left(p[(i+1)%N], p[(i+2)%N])!=isLeft)
+		forr(i, 1, n)
+			if(p[i].left(p[(i+1)%n], p[(i+2)%n])!=isLeft)
 				return false;
 		return true;
 	}
@@ -70,28 +69,28 @@ struct pol {
 	pol cut(ln l){   // cut CONVEX polygon by line l
 		vector<pt> q;  // returns part at left of l.pq
 		forr(i,0,n){
-			int d0=sgn(l.pq%(p[i]-l.p)),d1=sgn(l.pq%(p[(i+1)%n]-l.p));
+			int d0=sgn(l.pq^(p[i]-l.p)),d1=sgn(l.pq^(p[(i+1)%n]-l.p));
 			if(d0>=0)q.pb(p[i]);
 			ln m(p[i],p[(i+1)%n]);
 			if(d0*d1<0&&!(l/m))q.pb(l^m);
 		}
 		return pol(q);
 	}
-	double intercircle(circle c){ // area of intersection with circle
-		double r=0.;
+	tipo intercircle(circle c){ // area of intersection with circle
+		tipo r=0.;
 		forr(i,0,n){
-			int j=(i+1)%n;double w=c.intertriangle(p[i],p[j]);
-			if((p[j]-c.o)%(p[i]-c.o)>0)r+=w;
+			int j=(i+1)%n;tipo w=c.intertriangle(p[i],p[j]);
+			if((p[j]-c.o)^(p[i]-c.o)>EPS)r+=w;
 			else r-=w;
 		}
 		return abs(r);
 	}
-	double callipers(){ // square distance of most distant points
-		double r=0;     // prereq: convex, ccw, NO COLLINEAR POINTS
+	tipo callipers(){ // square distance of most distant points
+		tipo r=0;     // prereq: convex, ccw, NO COLLINEAR POINTS
 		for(int i=0,j=n<2?0:1;i<j;++i){
 			for(;;j=(j+1)%n){
 				r=max(r,(p[i]-p[j]).norm2());
-				if((p[(i+1)%n]-p[i])%(p[(j+1)%n]-p[j])<=EPS)break;
+				if(((p[(i+1)%n]-p[i])^(p[(j+1)%n]-p[j]))<=EPS)break;
 			}
 		}
 		return r;
