@@ -1,22 +1,16 @@
-vector<int> g[MAXN];
-vector<bool> vis;
-vector<int> match; 
-
-bool kuhn_dfs(int u){
-    if (vis[u]) return false;
-    vis[u] = true;
-    for (int v : g[u]) if (match[v] == -1 || kuhn_dfs(match[v])) {
-        match[v] = u;
-        return true;
-    } return false;
+vector<int> g[MAXN]; // [0,n)->[0,m)
+int n,m;
+int mat[MAXM];bool vis[MAXN];
+int match(int x){
+	if(vis[x])return 0;
+	vis[x]=true;
+	for(int y:g[x])if(mat[y]<0||match(mat[y])){mat[y]=x;return 1;}
+	return 0;
 }
-
-vector<int> kuhn(int n) {
-    match.resize(n, -1);
-    vis.resize(n);
-    forn(u, n) {
-        vis.assign(n, false);
-        kuhn_dfs(u);
-    }
-    return match;
-} //n: cant de nodos    devuelve un vector con -1 si no matchea y sino su match
+vector<pair<int,int> > max_matching(){
+	vector<pair<int,int> > r;
+	memset(mat,-1,sizeof(mat));
+	forn(i,n)memset(vis,false,sizeof(vis)),match(i);
+	forn(i,m)if(mat[i]>=0)r.pb({mat[i],i});
+	return r;
+}
