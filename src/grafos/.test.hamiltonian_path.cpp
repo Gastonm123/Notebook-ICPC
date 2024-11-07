@@ -40,7 +40,6 @@ bool hamilton() {
 }
 
 void solve() {
-
     int m;
     cin >> n >> m;
     memset(adj,false,sizeof(adj));

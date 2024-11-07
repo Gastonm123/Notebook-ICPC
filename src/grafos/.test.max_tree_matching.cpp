@@ -24,15 +24,18 @@ constexpr int MAXN = 200'000;
 int n, r, p[MAXN];
 vector<int> g[MAXN];
 
-vector<int> match;
-void maxmatch() {
-    match.assign(n,-1);
+int match[MAXN];
+int maxmatch() {
+    fill(match,match+n,-1);
+    int size = 0;
     auto dfs = [&](auto&& me, int u) -> int {
         for (auto v : g[u]) if (v != p[u])
             if (match[u] == me(me,v)) match[u] = v, match[v] = u;
+        size += match[u] >= 0;
         return match[u];
     };
     dfs(dfs,r);
+    return size;
 }
 
 void root(int u) { for (auto v : g[u]) if (v != p[u]) p[v] = u, root(v); }
@@ -48,9 +51,6 @@ int main() {
     }
 
     root(r=0);
-    maxmatch();
-    int ans = 0;
-    forn(u,n) ans += match[u] > u;
 
-    cout << ans << endl;
+    cout << maxmatch() << endl;
 }
