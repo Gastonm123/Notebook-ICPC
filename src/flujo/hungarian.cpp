@@ -1,4 +1,3 @@
-// Hungarian es O(n^3) mientras MCMF es O(n^3*logn)
 typedef long double td; typedef vector<int> vi; typedef vector<td> vd;
 const td INF=1e100;//for maximum set INF to 0, and negate costs
 bool zero(td x){return fabs(x)<1e-9;}//change to x==0, for ints/ll
