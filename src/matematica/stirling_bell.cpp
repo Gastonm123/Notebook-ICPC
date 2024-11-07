@@ -1,5 +1,6 @@
 ll STR[MAXN][MAXN], Bell[MAXN];
-
+//STR[n][k] = formas de particionar un conjunto de n elementos en k conjuntos
+//Bell[n] = formas de particionar un conjunto de n elementos
 forr(i, 1, MAXN)STR[i][1] = 1;
 forr(i, 2, MAXN)STR[1][i] = 0;
 forr(i, 2, MAXN)forr(j, 2, MAXN){
