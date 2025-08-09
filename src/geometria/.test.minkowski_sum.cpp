@@ -23,7 +23,8 @@ struct pt {
     ll x, y;
     pt operator-(pt p) {return {x-p.x,y-p.y};}
     pt operator+(pt p) {return {x+p.x,y+p.y};}
-    pt operator*(ll c) {return {c*x, c*y};}
+    pt operator*(ll c)  const{return {c*x, c*y};}
+    pt operator*(int c) const{return {c*x, c*y};}
     pt operator/(ll c) {return {x/c, y/c};}
     ll operator^(pt p) {return x*p.y-y*p.x;}
     bool operator==(pt p) {return mp(x,y) == mp(p.x,p.y);}
@@ -57,10 +58,33 @@ bool haslog(pt q, vector<pt> &p) {
     return !q.left2(p[a],p[a+1]);
 }
 
-// normalizar los poligonos antes de hacer la suma
-// si son poligonos concavos llamar a chull luego y normalizar
-// si son convexos eliminar puntos colineales y normalizar
-vector<pt> minkowski_sum(vector<pt> p, vector<pt> q){
+// CCW order
+// Does not include collinear points (change left for left2 to include)
+vector<pt> chull(vector<pt> &p){
+	if(sz(p)<3)return p;
+	vector<pt> r;
+	sort(p.begin(),p.end()); // first x, then y
+	forr(i,0,p.size()){ // lower hull
+		while(r.size()>=2&&r.back().left(r[r.size()-2],p[i]))r.pop_back();
+		r.pb(p[i]);
+	}
+	r.pop_back();
+	int k=r.size();
+	for(int i=p.size()-1;i>=0;--i){ // upper hull
+		while(r.size()>=k+2&&r.back().left(r[r.size()-2],p[i]))r.pop_back();
+		r.pb(p[i]);
+	}
+	r.pop_back();
+	return r;
+}
+
+using td = int;
+vector<pt> operator*(const vector<pt> &p, td u) {
+    vector<pt> r;
+    forn (i, sz(p)) r.pb(p[i]*u);
+    return r;
+}
+vector<pt> minkowski_sum(vector<pt> &p, vector<pt> &q){
 	int n=sz(p),m=sz(q),x=0,y=0;
 	forr(i,0,n) if(p[i]<p[x]) x=i;
 	forr(i,0,m) if(q[i]<q[y]) y=i;
@@ -71,26 +95,24 @@ vector<pt> minkowski_sum(vector<pt> p, vector<pt> q){
 		if(b.left(ans.back(),a)) ans.pb(b), y=(y+1)%m;
 		else ans.pb(a), x=(x+1)%n;
 	}
-	return ans; }
-
-vector<pt> polish(vector<pt> p) {
-    vector<pt> r; r.pb(p[0]);
-    forr (i, 1, sz(p)) if(!collinear(r.back(), p[i], p[(i+1)%sz(p)])) r.pb(p[i]);
-    normalize(r);
-    return r;
+	return ans;
+}
+vector<pt> do_minkowski(vector<pt> &p, vector<pt> &q) {
+    normalize(p); normalize(q);
+    vector<pt> sum = minkowski_sum(p, q);
+	return chull(sum); // no normalizado
 }
 
 int main(int argc, char **argv){ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     if(argc == 2) freopen(argv[1], "r", stdin);
     
     vector<pt> polys[2];
-    int ms[2];
     forn (i, 2) {
-        cin >> ms[i]; polys[i].resize(ms[i]);
-        forn (j, ms[i]) {
+        int n; cin >> n;
+        polys[i].resize(n);
+        forn (j, n) {
             cin >> polys[i][j].x >> polys[i][j].y;
         }
-        normalize(polys[i]);
     }
 
     int n; cin >> n; vector<pt> puntos(n);
@@ -99,26 +121,29 @@ int main(int argc, char **argv){ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
     }
 
     vector<bool> posible(n, 0);
-    vector<pt> p1 = polys[0], p2 = polys[1], mink[3];
-    mink[0] = polish(minkowski_sum(p1, p2));
+    vector<pt> mink, p1, p2;
+    mink = do_minkowski(polys[0], polys[1]);
+    normalize(mink);
     forn (i, n) {
-        posible[i] = haslog(puntos[i]*2, mink[0]);
+        posible[i] = haslog(puntos[i]*2, mink);
     }
-
+    
     // de p1 a p2
-    forn (i, sz(p1)) p1[i] = polys[0][i]*(-1);
-    forn (i, sz(p2)) p2[i] = polys[1][i]*2;
-    mink[1]  = polish(minkowski_sum(p1, p2));
+    p1 = polys[0] * -1;
+    p2 = polys[1] * 2;
+    mink = do_minkowski(p1, p2);
+    normalize(mink);
     forn (i, n) {
-        posible[i] = posible[i] || haslog(puntos[i], mink[1]);
+        posible[i] = posible[i] || haslog(puntos[i], mink);
     }
-
+    
     // de p2 a p1
-    forn (i, sz(p1)) p1[i] = polys[0][i]*2;
-    forn (i, sz(p2)) p2[i] = polys[1][i]*(-1);
-    mink[2]  = polish(minkowski_sum(p1, p2));
+    p1 = polys[0] * 2;
+    p2 = polys[1] * -1; 
+    mink = do_minkowski(p1, p2);
+    normalize(mink);
     forn (i, n) {
-        posible[i] = posible[i] || haslog(puntos[i], mink[2]);
+        posible[i] = posible[i] || haslog(puntos[i], mink);
     }
 
     forn (i, n) {
