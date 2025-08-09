@@ -24,8 +24,10 @@ struct pt {
 	bool operator<(pt p)const{ // for convex hull
 		return x<p.x-EPS||(abs(x-p.x)<=EPS&&y<p.y-EPS);}
     bool collinear(pt p, pt q){return fabs((p-*this)^(q-*this))<EPS;}
+    bool dir(pt p, pt q){ // does it have the same direction of pq?
+        return this->collinear(p, q)&&(q-p)*(*this-p)>0;}
 	pt rot(pt r){return pt(*this^r,*this*r);}
-	pt rot(tipo a){return rot(pt(sin(a),cos(a)));}      
+	pt rot(tipo a){return rot(pt(sin(a),cos(a)));}
 };
 pt ccw90(1,0);
 pt cw90(-1,0);
