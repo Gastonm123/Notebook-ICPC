@@ -1,5 +1,4 @@
 // Dado un array y una operacion asociativa con neutro, get(i,j) opera en [i,j)
-#define MAXN 100000
 #define oper(x, y) max(x, y)
 const int neutro=0;
 struct RMQ{

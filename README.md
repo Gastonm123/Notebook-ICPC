@@ -1,6 +1,6 @@
 # Notebook para ICPC
 
-Contenedor de algoritmos propios, contribuciones a otros notebook populares como *El Vasito* y *El Diego*, y recordatorios sobre detalles de implementación.
+Contenedor de algoritmos propios, contribuciones a otros notebook populares como *El Vasito*, *El Diego* y *La pandilla*.
 
 ## Compilar notebook
 
@@ -20,3 +20,5 @@ o instalar xelatex y compilarlo con mejores fuentes
 sudo apt install texlive-xetex
 xelatex main.tex
 ```
+
+Si surge algún error, intentar borrar todos los archivos creados por latex y volver a intentar.
