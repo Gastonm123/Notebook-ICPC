@@ -35,13 +35,13 @@
 }
 
 \title{Notebook}
-\author{Nombre}
+\author{Para el regional elegimos nombre}
 
 \begin{document}
 
 \begin{center}
     \LARGE\textbf{Notebook}\\[1em]
-    \large Nombre\\[1em]
+    \large Para el regional elegimos nombre\\[1em]
     \normalsize \today\\[1em]
 \end{center}
 
@@ -81,13 +81,17 @@
 
 \lstinputlisting{src/estructuras/fenwick.cpp}
 
-% \subsection{Tabla Aditiva}
-
-% \lstinputlisting{src/estructuras/tablitaAditiva.cpp}
-
 \subsection{Union Find}
 
 \lstinputlisting{src/estructuras/union_find.cpp}
+
+\subsection{Chull Trick}
+
+\lstinputlisting{src/estructuras/chull_trick.cpp}
+
+\subsection{Chull Trick Dinámico}
+
+\lstinputlisting{src/estructuras/chull_trick_dynamic.cpp}
 
 \section{Matemática}
 
@@ -129,31 +133,11 @@
 
 \lstinputlisting{src/matematica/frac.cpp}
 
-\section{Cotas}
+\subsection{Gauss}
 
-\begin{tabular}{p{0.33\textwidth} p{0.33\textwidth}}
-  \textbf{Dinitz en una red unitaria} & $O(\sqrt{V}\cdot E)$ \\
-\end{tabular}
+\lstinputlisting{src/matematica/gauss.cpp}
 
 \section{Geometria}
-
-\subsection{Formulas}
-
-\begin{itemize}
-  \item \textbf{Ley de cosenos}: sea un triangulo con lados A, B, C y angulos $\alpha$, $\beta$, $\gamma$ entre A, B y C, respectivamente.
-  $$A^2=B^2+C^2-2*cos(\alpha)$$
-  $$B^2=A^2+C^2-2*cos(\beta)$$
-  $$C^2=A^2+B^2-2*cos(\gamma)$$
-  \item \textbf{Ley de senos}: idem
-  $$\frac{sin(\alpha)}{A}=\frac{sin(\beta)}{B}=\frac{sin(\gamma)}{C}$$
-  \item \textbf{Valor de PI}: $\pi=acos(-1.0)$ o $\pi=4*atan(1.0)$
-  \item \textbf{Longitud de una cuerda}: sea $\alpha$ el angulo descripto por una cuerda de longitud $l$.
-  $$l=\sqrt{2*r^2*(1-cos(\alpha))}$$
-  \item \textbf{Formula de Heron}: sea un triangulo con lados a, b, c y semiperimetro s. El area del triangulo es
-  $$A=\sqrt{s*(s-a)*(s-b)*(s-c)}$$
-  \item \textbf{Teorema de Pick}: sean A, I y B el area de un poligono, la cantidad de puntos con coordenadas enteras dentro del mismo y la cantidad de puntos con coordenadas enteras en el borde del mismo.
-  $$A=I+\frac{B}{2}-1$$
-\end{itemize}
 
 \subsection{Punto}
 
@@ -271,6 +255,10 @@
 
 \lstinputlisting{src/grafos/bipartite.cpp}
 
+\subsection{Centroid Decomposition}
+
+\lstinputlisting{src/grafos/centroid.cpp}
+
 \subsection{HLD}
 
 \lstinputlisting{src/grafos/hld.cpp}
@@ -341,36 +329,9 @@
 
 \lstinputlisting{src/otros/indexed_set.cpp}
 
-\subsection{Iterar subconjuntos}
+\subsection{Subconjuntos}
 
-\begin{itemize}
-  \item Iterar por todos los subconjuntos de n elementos $O(2^n)$.
-  \begin{lstlisting}
-    for(int bm=0; bm<(1<<n); bm++)
-  \end{lstlisting}
-
-  \item Iterar por cada superconjunto de un subconjunto de n elementos $O(2^n)$.
-  \begin{lstlisting}
-    for(int sbm=~bm; sbm; sbm=(sbm-1)&(~bm)) // super=bm&sbm
-  \end{lstlisting}
-
-  \item Iterar por cada subconjunto de un subconjunto de n elementos $O(2^n)$.
-  \begin{lstlisting}
-    for(int sbm=bm; sbm; sbm=(sbm-1)&bm) // sub=sbm
-  \end{lstlisting}
-
-  \item Para cada subconjunto de n elementos, iterar por cada superconjunto $O(3^n)$.
-  \begin{lstlisting}
-    for(int bm=0; bm<(1<<n); bm++)
-      for(int sbm=~bm; sbm; sbm=(sbm-1)&(~bm)) // super=bm&sbm
-  \end{lstlisting}
-
-  \item Para cada subconjunto de n elementos, iterar por cada subsubconjunto $O(3^n)$.
-  \begin{lstlisting}
-    for(int bm=0; bm<(1<<n); bm++)
-      for(int sbm=bm; sbm; sbm=(sbm-1)&(bm)) // sub=sbm
-  \end{lstlisting}
-\end{itemize}
+\lstinputlisting{src/otros/subconjuntos.cpp}
 
 \subsection{Simpson}
 

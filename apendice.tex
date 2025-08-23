@@ -1,0 +1,56 @@
+\documentclass[12pt,a4paper]{article}
+
+% Paquetes
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{array}
+
+% Márgenes cómodos
+\geometry{margin=2.5cm}
+
+\begin{document}
+
+\section*{Apéndice} \vspace{1em}
+
+\begin{itemize}
+  \item \textbf{Dinitz en una red unitaria} $O(\sqrt{V}\cdot E)$ \\
+  \item \textbf{Ley de cosenos}: Sea un triángulo con lados $A, B, C$ y ángulos 
+  $\alpha, \beta, \gamma$ opuestos a $A, B, C$, respectivamente.
+  \[
+    A^2 = B^2 + C^2 - 2BC \cos(\alpha)
+  \]
+  \[
+    B^2 = A^2 + C^2 - 2AC \cos(\beta)
+  \]
+  \[
+    C^2 = A^2 + B^2 - 2AB \cos(\gamma)
+  \]
+
+  \item \textbf{Ley de senos}:
+  \[
+    \frac{\sin(\alpha)}{A} = \frac{\sin(\beta)}{B} = \frac{\sin(\gamma)}{C}
+  \]
+
+  \item \textbf{Valor de $\pi$}: 
+  \[
+    \pi = \arccos(-1.0) \quad \text{o} \quad \pi = 4 \cdot \arctan(1.0)
+  \]
+
+  \item \textbf{Longitud de una cuerda}: Sea $\alpha$ el ángulo descripto por una cuerda de longitud $l$ en un círculo de radio $r$.
+  \[
+    l = \sqrt{2r^2 \, (1 - \cos(\alpha))}
+  \]
+
+  \item \textbf{Fórmula de Herón}: Sea un triángulo con lados $a, b, c$ y semiperímetro $s=\tfrac{a+b+c}{2}$. El área del triángulo es
+  \[
+    A = \sqrt{s(s-a)(s-b)(s-c)}
+  \]
+
+  \item \textbf{Teorema de Pick}: Sean $A$ el área de un polígono, $I$ la cantidad de puntos de coordenadas enteras en su interior, y $B$ la cantidad de puntos de coordenadas enteras en el borde.
+  \[
+    A = I + \frac{B}{2} - 1
+  \]
+\end{itemize}
+
+\end{document}

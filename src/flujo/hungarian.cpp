@@ -10,10 +10,15 @@ struct Hungarian{
 	td assign() {
 		int mat = 0; vd ds(n), u(n), v(n); vi dad(n), sn(n);
 		forr(i,0,n)u[i]=*min_element(all(cs[i]));
-		forr(j,0,n){v[j]=cs[0][j]-u[0];forr(i,1,n)v[j]=min(v[j],cs[i][j]-u[i]);}
+		forr(j,0,n){
+			v[j]=cs[0][j]-u[0];
+			forr(i,1,n)v[j]=min(v[j],cs[i][j]-u[i]);
+		}
 		L=R=vi(n, -1);
-		forr(i,0,n)forr(j,0,n)
-			if(R[j]==-1&&zero(cs[i][j]-u[i]-v[j])){L[i]=j;R[j]=i;mat++;break;}
+		forr(i,0,n)forr(j,0,n) {
+			if(R[j]==-1&&zero(cs[i][j]-u[i]-v[j])){
+				L[i]=j;R[j]=i;mat++;break;
+		} }
 		for(;mat<n;mat++){
 		    int s=0, j=0, i;
 		    while(L[s] != -1)s++;

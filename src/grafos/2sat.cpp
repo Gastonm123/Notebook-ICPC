@@ -5,10 +5,10 @@ struct TwoSatSolver{
     vector<bool> used;
     vector<int> order,comp;
     vector<bool> assignment;
-
-    TwoSatSolver(int _n_vars) : n_vars(_n_vars), n_vertices(2*n_vars), 
-                                adj(n_vertices), adj_t(n_vertices), used(n_vertices), 
-                                order(), comp(n_vertices, -1), assignment(n_vars){
+    TwoSatSolver(int _n_vars) : n_vars(_n_vars),
+        n_vertices(2*n_vars), adj(n_vertices),
+        adj_t(n_vertices), used(n_vertices),
+        order(), comp(n_vertices, -1), assignment(n_vars){
         order.reserve(n_vertices);
     } 
     void dfs1(int v){
@@ -30,13 +30,11 @@ struct TwoSatSolver{
         forn(i, n_vertices){
             if(!used[i]) dfs1(i);
         }
-
         comp.assign(n_vertices, -1);
         for(int i = 0, j = 0; i < n_vertices; ++i){
             int v = order[n_vertices - i - 1];
             if(comp[v] == -1) dfs2(v, j++);
         }
-
         assignment.assign(n_vars, false);
         for(int i = 0; i < n_vertices; i+=2){
             if(comp[i] == comp[i+1]) return false;
@@ -44,7 +42,6 @@ struct TwoSatSolver{
         }
         return true;
     }
-
     void add_disjunction(int a, bool na, int b, bool nb){
         a = 2 * a ^ na;
         b = 2 * b ^ nb;
@@ -55,5 +52,4 @@ struct TwoSatSolver{
         adj_t[b].pb(neg_a);
         adj_t[a].pb(neg_b);
     }
-
 };
