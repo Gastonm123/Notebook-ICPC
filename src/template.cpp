@@ -12,10 +12,10 @@ using namespace std;
 #define snd second
 #define mp make_pair
 #define endl '\n'
-#define dprint(v) cerr << #v " = " << v << endl
+#define dprint(v) cerr << __LINE__ << ": " #v " = " << v << endl
 
-typedef long long ll;
-typedef pair<int, int> pii;
+using ll = long long;
+using pii = pair<int,int>;
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0);
