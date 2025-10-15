@@ -1,35 +1,39 @@
-bool iszero(td u) { return abs(u)<=EPS; }
-struct pt {
-    td x, y;
-    td z; // only for 3d
-    pt() {}
-    pt(td _x, td _y) : x(_x), y(_y) {}
-    pt(td _x, td _y, td _z) : x(_x), y(_y), z(_z) {} // for 3d
-    td norm2(){ return *this**this; }
-    td norm(){ return sqrt(norm2()); }
-    pt operator+(pt o){ return pt(x+o.x,y+o.y); }
-    pt operator-(pt o){ return pt(x-o.x,y-o.y); }
-    pt operator*(td u){ return pt(x*u,y*u); }
-    pt operator/(td u) {
-        if (iszero(u)) return pt(INF,INF);
-        return pt(x/u,y/u);
+using T = double;
+bool iszero(T u) { return abs(u)<=EPS; }
+struct Pt {
+    T x, y;
+    T z; // only for 3d
+    Pt() {}
+    Pt(T _x, T _y) : x(_x), y(_y) {}
+    Pt(T _x, T _y, T _z) : x(_x), y(_y), z(_z) {} // for 3d
+    T norm2(){ return *this**this; }
+    T norm(){ return sqrt(norm2()); }
+    Pt operator+(Pt o){ return Pt(x+o.x,y+o.y); }
+    Pt operator-(Pt o){ return Pt(x-o.x,y-o.y); }
+    Pt operator*(T u){ return Pt(x*u,y*u); }
+    Pt operator/(T u) {
+        if (iszero(u)) return Pt(INF,INF);
+        return Pt(x/u,y/u);
     }
-    td operator*(pt o){ return x*o.x+y*o.y; }
-	pt operator^(pt p){ // only for 3D
-		return pt(y*p.z-z*p.y, z*p.x-x*p.z, x*p.y-y*p.x); }
-    td operator%(pt o){ return x*o.y-y*o.x; }
-    td angle(pt o){ return atan2(*this%o, *this*o); }
-	pt unit(){ return *this/norm(); }
-    bool left(pt p, pt q){ // is it to the left of directed line pq?
+    T operator*(Pt o){ return x*o.x+y*o.y; }
+	Pt operator^(Pt p){ // only for 3D
+		return Pt(y*p.z-z*p.y, z*p.x-x*p.z, x*p.y-y*p.x); }
+    T operator%(Pt o){ return x*o.y-y*o.x; }
+    T angle(Pt o){ return atan2(*this%o, *this*o); }
+//  T angle(Pt o){ // accurate around 90 degrees
+//      if (*this%o>0) return acos(*this*o);
+//      return 2*M_PI-acos(*this*o); }
+	Pt unit(){ return *this/norm(); }
+    bool left(Pt p, Pt q){ // is it to the left of directed line pq?
 		return ((q-p)%(*this-p))>EPS; }
-	bool operator<(pt p)const{ // for convex hull
+	bool operator<(Pt p)const{ // for convex hull
 		return x<p.x-EPS||(iszero(x-p.x)&&y<p.y-EPS); }
-    bool collinear(pt p, pt q){
+    bool collinear(Pt p, Pt q){
         return iszero((p-*this)%(q-*this)); }
-    bool dir(pt p, pt q){ // does it have the same direction of pq?
+    bool dir(Pt p, Pt q){ // does it have the same direction of pq?
         return this->collinear(p, q)&&(q-p)*(*this-p)>EPS; }
-	pt rot(pt r){ return pt(*this%r,*this*r); }
-	pt rot(td a){ return rot(pt(sin(a),cos(a))); }
+	Pt rot(Pt r){ return Pt(*this%r,*this*r); }
+	Pt rot(T a){ return rot(Pt(sin(a),cos(a))); }
 };
-pt ccw90(1,0);
-pt cw90(-1,0);
+Pt ccw90(1,0);
+Pt cw90(-1,0);

@@ -1,16 +1,17 @@
-struct pol {
-    int n;vector<pt> p;
-	pol(){}
-	pol(vector<pt> _p){p=_p;n=p.size();}
-    tipo area() {
+using T = double;
+struct Pol {
+    int n;vector<Pt> p;
+	Pol(){}
+	Pol(vector<Pt> _p){p=_p;n=p.size();}
+    T area() {
         ll a = 0;
         forr (i, 1, sz(p)-1) {
             a += (p[i]-p[0])^(p[i+1]-p[0]);
         }
         return abs(a)/2;
     }
-    bool has(pt q){ // O(n), winding number
-		forr(i,0,n)if(ln(p[i],p[(i+1)%n]).seghas(q))return true;
+    bool has(Pt q){ // O(n), winding number
+		forr(i,0,n)if(Ln(p[i],p[(i+1)%n]).seghas(q))return true;
 		int cnt=0;
 		forr(i,0,n){
 			int j=(i+1)%n;
@@ -24,11 +25,11 @@ struct pol {
 	void normalize(){ // (call before haslog, remove collinear first)
 		if(n>=3&&p[2].left(p[0],p[1]))reverse(p.begin(),p.end());
 		int pi=min_element(p.begin(),p.end())-p.begin();
-		vector<pt> s(n);
+		vector<Pt> s(n);
 		forr(i,0,n)s[i]=p[(pi+i)%n];
 		p.swap(s);
 	}
-	bool haslog(pt q){ // O(log(n)) only CONVEX. Call normalize first
+	bool haslog(Pt q){ // O(log(n)) only CONVEX. Call normalize first
 		if(q.left(p[0],p[1])||q.left(p.back(),p[0]))return false;
 		int a=1,b=p.size()-1;  // returns true if point on boundary
 		while(b-a>1){          // (change sign of EPS in left
@@ -46,18 +47,18 @@ struct pol {
 				return false;
 		return true;
 	}
-	pt farthest(pt v){ // O(log(n)) only CONVEX
+	Pt farthest(Pt v){ // O(log(n)) only CONVEX
 		if(n<10){
 			int k=0;
 			forr(i,1,n)if(v*(p[i]-p[k])>EPS)k=i;
 			return p[k];
 		}
 		if(n==sz(p))p.pb(p[0]);
-		pt a=p[1]-p[0];
+		Pt a=p[1]-p[0];
 		int s=0,e=n,ua=v*a>EPS;
 		if(!ua&&v*(p[n-1]-p[0])<=EPS)return p[0];
 		while(1){
-			int m=(s+e)/2;pt c=p[m+1]-p[m];
+			int m=(s+e)/2;Pt c=p[m+1]-p[m];
 			int uc=v*c>EPS;
 			if(!uc&&v*(p[m-1]-p[m])<=EPS)return p[m];
 			if(ua&&(!uc||v*(p[s]-p[m])>EPS))e=m;
@@ -66,27 +67,27 @@ struct pol {
 			assert(e>s+1);
 		}
 	}
-	pol cut(ln l){   // cut CONVEX polygon by line l
-		vector<pt> q;  // returns part at left of l.pq
+	Pol cut(Ln l){   // cut CONVEX polygon by line l
+		vector<Pt> q;  // returns part at left of l.pq
 		forr(i,0,n){
 			int d0=sgn(l.pq^(p[i]-l.p)),d1=sgn(l.pq^(p[(i+1)%n]-l.p));
 			if(d0>=0)q.pb(p[i]);
-			ln m(p[i],p[(i+1)%n]);
+			Ln m(p[i],p[(i+1)%n]);
 			if(d0*d1<0&&!(l/m))q.pb(l^m);
 		}
-		return pol(q);
+		return Pol(q);
 	}
-	tipo intercircle(circle c){ // area of intersection with circle
-		tipo r=0.;
+	T intercircle(circle c){ // area of intersection with circle
+		T r=0.;
 		forr(i,0,n){
-			int j=(i+1)%n;tipo w=c.intertriangle(p[i],p[j]);
+			int j=(i+1)%n;T w=c.intertriangle(p[i],p[j]);
 			if((p[j]-c.o)^(p[i]-c.o)>EPS)r+=w;
 			else r-=w;
 		}
 		return abs(r);
 	}
-	tipo callipers(){ // square distance of most distant points
-		tipo r=0;     // prereq: convex, ccw, NO COLLINEAR POINTS
+	T callipers(){ // square distance of most distant points
+		T r=0;     // prereq: convex, ccw, NO COLLINEAR POINTS
 		for(int i=0,j=n<2?0:1;i<j;++i){
 			for(;;j=(j+1)%n){
 				r=max(r,(p[i]-p[j]).norm2());
