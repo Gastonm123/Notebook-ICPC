@@ -1,3 +1,4 @@
+// complejidad O(V^2*E)
 struct Dinic{
 	int nodes,src,dst;
 	vector<int> dist,q,work;

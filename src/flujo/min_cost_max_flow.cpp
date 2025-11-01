@@ -2,6 +2,7 @@ typedef ll tf;
 typedef ll tc;
 const tf INFFLOW=1e9;
 const tc INFCOST=1e9;
+// complejidad O(V^2*E*log(V))
 struct MCF{
 	int n;
 	vector<tc> prio, pot; vector<tf> curflow; vector<int> prevedge,prevnode;

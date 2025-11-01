@@ -1,5 +1,6 @@
 vector<pair<int,int>> g[MAXN];  // u->[(v,cost)]
 ll dist[MAXN];
+// complejidad O((E+V)*log(V))
 void dijkstra(int x){
 	memset(dist,-1,sizeof(dist));
 	priority_queue<pair<ll,int> > q;
