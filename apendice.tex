@@ -5,6 +5,8 @@
 \usepackage{amsmath, amssymb}
 \usepackage{geometry}
 \usepackage{array}
+\usepackage{graphicx}
+\usepackage[spanish]{babel}
 
 % Márgenes cómodos
 \geometry{margin=2.5cm}
@@ -12,7 +14,11 @@
 
 \begin{document}
 
-\section*{Apéndice} \vspace{1em}
+\begin{center}
+    {\Large\textbf{Apéndice}} \\ \vspace{.5em}
+    {\large Para el regional elegimos nombre} \\ \vspace{.5em}
+    \today \vspace{1em}
+\end{center}
 
 Dinitz en una red unitaria: $O(\sqrt{V}\cdot E)$ \\
 
@@ -42,4 +48,12 @@ Longitud de una cuerda: Sea $\alpha$ el ángulo descripto por una cuerda de long
 Fórmula de Herón: Sea un triángulo con lados $a, b, c$ y semiperímetro $s=\tfrac{a+b+c}{2}$. El área del triángulo es $$A = \sqrt{s(s-a)(s-b)(s-c)}$$
 
 Teorema de Pick: Sean $A$ el área de un polígono, $I$ la cantidad de puntos de coordenadas enteras en su interior, y $B$ la cantidad de puntos de coordenadas enteras en el borde.  $$ A = I + \frac{B}{2} - 1 $$
+
+\begin{figure}[p]
+    \vspace{-10cm}
+    \centering
+    \includegraphics[width=0.8\linewidth]{SA_suffix_links.png}
+    \caption{Suffix automaton de \textit{abcbc}.}
+\end{figure}
+
 \end{document}
