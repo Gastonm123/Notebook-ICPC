@@ -1,2 +1,5 @@
 clear
-make -s $1 && ./$1 < $2
+make -s $1 &&
+for CASE in ./cases/$1/*; do
+    ./$1 < $CASE
+done
