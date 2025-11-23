@@ -7,7 +7,7 @@ node *make(int val) {
     return new node { val, rand(), 1, nullptr, nullptr };
 }
 int tam(node *n) { return n ? n->tam : 0; }
-void recalc(node *n) { n->tam = tam(n->l) + 1 + get_tam(n->r); }
+void recalc(node *n) { n->tam = tam(n->l) + 1 + tam(n->r); }
 node* merge(node* s, node* t) {
     if (s == nullptr) return t;
     if (t == nullptr) return s;
