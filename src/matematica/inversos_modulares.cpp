@@ -1,8 +1,8 @@
 constexpr ll MOD = 1000000007; // tmb es comun 998'244'353
 ll invmod[MAXN]; // inversos módulo MOD hasta MAXN
 void invmods() { // todo entero en [2,MAXN] debe ser coprimo con MOD
-    inv[1] = 1;
-    forr(i, 2, MAXN) inv[i] = MOD - MOD/i*inv[MOD%i]%MOD;
+    invmod[1] = 1;
+    forr(i, 2, MAXN) invmod[i] = MOD - MOD/i*invmod[MOD%i]%MOD;
 }
 
 // si MAXN es demasiado grande o MOD no es fijo:

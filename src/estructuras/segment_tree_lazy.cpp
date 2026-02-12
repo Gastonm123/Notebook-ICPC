@@ -15,13 +15,13 @@ struct RMQ{
 		forn(i, 2*sz) dirty[i]=neutro2;
 	}
 	void push(int n, int a, int b){//propaga el dirty a sus hijos
-		if(dirty[n]!=0){
+		if(dirty[n]!=neutro2){
 			t[n]+=oper2(dirty[n], a, b);//altera el nodo 
 			if(n<sz){//cambiar segun el problema
 				dirty[2*n]   = dirty[n];
 				dirty[2*n+1] = dirty[n];
 			}
-			dirty[n]=0;
+			dirty[n]=neutro2;
 		}
 	}
 	Elem get(int i, int j, int n, int a, int b){//O(lgn)

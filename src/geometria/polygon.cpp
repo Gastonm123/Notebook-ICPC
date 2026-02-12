@@ -70,7 +70,8 @@ struct Pol {
 	Pol cut(Ln l){   // cut CONVEX polygon by line l
 		vector<Pt> q;  // returns part at left of l.pq
 		forr(i,0,n){
-			int d0=sgn(l.pq^(p[i]-l.p)),d1=sgn(l.pq^(p[(i+1)%n]-l.p));
+			int d0=sgn(l.pq^(p[i]-l.p));
+			int d1=sgn(l.pq^(p[(i+1)%n]-l.p));
 			if(d0>=0)q.pb(p[i]);
 			Ln m(p[i],p[(i+1)%n]);
 			if(d0*d1<0&&!(l/m))q.pb(l^m);
@@ -91,7 +92,8 @@ struct Pol {
 		for(int i=0,j=n<2?0:1;i<j;++i){
 			for(;;j=(j+1)%n){
 				r=max(r,(p[i]-p[j]).norm2());
-				if(((p[(i+1)%n]-p[i])^(p[(j+1)%n]-p[j]))<=EPS)break;
+				if(((p[(i+1)%n]-p[i])^(p[(j+1)%n]-p[j]))<=EPS)
+					break;
 			}
 		}
 		return r;

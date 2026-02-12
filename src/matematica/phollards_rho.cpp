@@ -44,7 +44,7 @@ void factRho(map<ll,ll>&prim, ll n){ //O (lg n)^3. un solo numero
 	if (n == 1) return;
 	if (rabin(n)) { prim[n]++; return; }
 	ll factor = rho(n);
-	factRho(factor, prim); factRho(n/factor, prim);
+	factRho(prim, factor); factRho(prim, n/factor);
 }
 auto fact(ll n){
 	map<ll,ll>prim;
