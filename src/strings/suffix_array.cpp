@@ -26,16 +26,16 @@ vector<int> compute_sa(string& s){ // O(n*log2(n))
 	return sa; // sa[i] = i-th suffix of s in lexicographical order
 }
 vector<int> compute_lcp(string& s, vector<int>& sa){
-	int n = sz(s) + 1, L = 0;
-	vector<int> lcp(n), plcp(n), phi(n);
-	phi[sa[0]] = -1;
-	forr(i, 1, n) phi[sa[i]] = sa[i-1];
-	forn(i,n) {
-		if (phi[i] < 0) { plcp[i] = 0; continue; }
-		while(s[i+L] == s[phi[i]+L]) ++L;
-		plcp[i] = L;
-		L = max(L - 1, 0);
+	int n=sz(s),L=0;
+	vector<int> lcp(n),plcp(n),phi(n);
+	phi[sa[0]]=-1;
+	forr(i,1,n)phi[sa[i]]=sa[i-1];
+	forn(i,n){
+		if(phi[i]<0){plcp[i]=0;continue;}
+		while(s[i+L]==s[phi[i]+L])L++;
+		plcp[i]=L;
+		L=max(L-1,0);
 	}
-	forn(i, n) lcp[i] = plcp[sa[i]];
-	return lcp; // lcp[i] = longest common prefix between sa[i-1] and sa[i]
+	forn(i,n)lcp[i]=plcp[sa[i]];
+	return lcp; // lcp[i]=longest common prefix between sa[i-1] and sa[i]
 }
