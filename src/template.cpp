@@ -6,7 +6,7 @@ using namespace std;
 #define dforr(i, a, b) for (int i = int(b)-1; i >= int(a); i--)
 #define dforn(i, n) dforr(i,0,n)
 #define all(v) begin(v),end(v)
-#define sz(v) (int(size(v)))
+#define sz(v) (int(v.size()))
 #define pb push_back
 #define fst first
 #define snd second
