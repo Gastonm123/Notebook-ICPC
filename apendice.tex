@@ -1,8 +1,11 @@
+%\usepackage{comment}
 \begin{center}
     {\Large\textbf{Apéndice}} \\ \vspace{.5em}
-    {\large Para el regional elegimos nombre} \\ \vspace{.5em}
+    {\large Para la pda elegimos wf} \\ \vspace{.5em}
     \today \vspace{1em}
 \end{center}
+
+\setlength{\parindent}{0pt}
 
 Dinitz en una red unitaria: $O(\sqrt{V}\cdot E)$ \\
 
@@ -31,6 +34,67 @@ Longitud de una cuerda: Sea $\alpha$ el ángulo descripto por una cuerda de long
 Fórmula de Herón: Sea un triángulo con lados $a, b, c$ y semiperímetro $s=\tfrac{a+b+c}{2}$. El área del triángulo es $$A = \sqrt{s(s-a)(s-b)(s-c)}$$
 
 Teorema de Pick: Sean $A$ el área de un polígono, $I$ la cantidad de puntos de coordenadas enteras en su interior, y $B$ la cantidad de puntos de coordenadas enteras en el borde.  $$ A = I + \frac{B}{2} - 1 $$
+
+Dualidad punto-linea: Hay una correspondencia uno a uno entre todas las lineas no verticales y todos los puntos del plano.
+\begin{align*}
+\text{Punto } (r,s)
+  &\;\longleftrightarrow\; \text{Línea } y = \alpha (r x - \mu s) \\
+\text{Línea } y = mx + c
+  &\;\longleftrightarrow\; \text{Punto } (\mu m, -\alpha \mu c)
+\end{align*}
+Cuando $\alpha \mu > 0$, si un punto $p$ esta arriba de una linea $L$, entonces
+su dual $d(p)$ esta debajo del dual $d(L)$ (es decir, el orden se invierte).
+
+Cuando $\alpha \mu < 0$, el orden se preserva.
+
+Cuando $\alpha \mu = 1$, el dual del dual es el mismo punto/recta. Es decir, $d(d(p))=p$ y $d(d(L))=L$.
+
+Si un punto $p$ está sobre una linea $L$, entonces el dual de la linea $d(L)$ está sobre el dual del punto $d(p)$.
+
+Dos lineas $L_1$ y $L_2$ se intersecan en un punto $p$ sii el dual $d(p)$ pasa por el dual de ambas lineas $d(L_1)$ y $d(L_2)$.
+
+\begin{comment}
+https://arxiv.org/html/2503.17372v1
+A general line through the point $(r,s)$ is
+\[
+y - s = m(x - r).
+\]
+This line gets mapped to a point $(\mu m, \lambda (s - mr))$.
+As this point must lie on the line
+\[
+y = \alpha r x + \beta s,
+\]
+we get
+\[
+\lambda (s - mr) = \alpha (\mu m) + \beta s,
+\]
+or
+\[
+s(\lambda - \beta) = m(\alpha \mu + r \lambda).
+\]
+Hence
+\[
+\lambda = \beta
+\quad \text{and} \quad
+\alpha \mu = - r \lambda,
+\]
+that is,
+\[
+\alpha \mu = -\beta.
+\]
+
+Thus, the permissible transforms will map the point $(r,s)$ to the line
+\[
+y = \alpha (r x - \mu s),
+\]
+and will map the line $y = mx + c$ to the point
+\[
+(\mu m, -\alpha \mu c).
+\]
+
+If $\alpha \mu > 0$, then if a point $p$ lies above a line $L$,
+the image $d(p)$ lies below $d(L)$ (i.e.\ the order gets reversed).
+\end{comment}
 
 \begin{figure}[p]
     % \vspace{-10cm}

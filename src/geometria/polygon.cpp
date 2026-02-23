@@ -3,13 +3,13 @@ struct Pol {
     int n;vector<Pt> p;
 	Pol(){}
 	Pol(vector<Pt> _p){p=_p;n=p.size();}
-    T area() {
-        ll a = 0;
-        forr (i, 1, sz(p)-1) {
-            a += (p[i]-p[0])^(p[i+1]-p[0]);
-        }
-        return abs(a)/2;
-    }
+	T area() {
+		T a = 0;
+		forn (i, sz(p)) {
+			a += p[i]%p[(i+1)%n];
+		}
+		return abs(a)/2;
+	}
     bool has(Pt q){ // O(n), winding number
 		forr(i,0,n)if(Ln(p[i],p[(i+1)%n]).seghas(q))return true;
 		int cnt=0;
