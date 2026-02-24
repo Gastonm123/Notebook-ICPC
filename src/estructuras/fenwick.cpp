@@ -1,8 +1,7 @@
 struct Fenwick{
-    static const int sz=1<<K;
-    ll t[sz]={};
+    ll t[N]={};
     void adjust(int p, ll v){
-        for(int i=p+1;i<sz;i+=(i&-i)) t[i]+=v;
+        for(int i=p+1;i<N;i+=(i&-i)) t[i]+=v;
     }
     ll sum(int p){ // suma [0,p)
         ll s = 0;
@@ -11,13 +10,13 @@ struct Fenwick{
     }
     ll sum(int a, int b){return sum(b)-sum(a);} // suma [a,b)
 
-    //funciona solo con valores no negativos en el fenwick
-    //longitud del minimo prefijo t.q. suma <= x
-    //para el maximo v+1 y restar 1 al resultado
+    // funciona solo con valores no negativos en el fenwick
+    // pref(v) devuelve el primer entero p con suma [0,p) >= v.
+    // similar a lower_bound. si no existe devuelve N
     int pref(ll v){
-        int x = 0;
-        for(int d = 1<<(K-1); d; d>>=1){
-            if( t[x|d] < v ) x |= d, v -= t[x];
+        ll x = 0;
+        for (int d=1<<30;d;d>>=1){
+            if(x+d<N && t[x+d]<v) x+=d, v-=t[x];
         }
         return x+1;
     }
