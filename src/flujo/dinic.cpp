@@ -16,7 +16,9 @@ struct Dinic{
 			int u=q[qh];
 			forn(i,sz(g[u])){
 				edge &e=g[u][i];int v=g[u][i].to;
-				if(dist[v]<0&&e.f<e.cap)dist[v]=dist[u]+1,q[qt++]=v;
+				if(dist[v]<0&&e.f<e.cap){
+					dist[v]=dist[u]+1,q[qt++]=v;
+				}
 			}
 		}
 		return dist[dst]>=0;

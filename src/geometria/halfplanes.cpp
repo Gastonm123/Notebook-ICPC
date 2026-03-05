@@ -7,7 +7,8 @@ struct Halfplane:public Ln{
 	bool out(Pt q){return pq%(q-p)<-EPS;}
 };
 vector<Pt> intersect(vector<Halfplane> b){
-	vector<Pt>bx={{DINF,DINF},{-DINF,DINF},{-DINF,-DINF},{DINF,-DINF}};
+	vector<Pt>bx={{DINF,DINF},{-DINF,DINF},
+				  {-DINF,-DINF},{DINF,-DINF}};
 	forr(i,0,4) b.pb(Halfplane(bx[i],bx[(i+1)%4]));
 	sort(all(b));
 	int n=sz(b),q=1,h=0;

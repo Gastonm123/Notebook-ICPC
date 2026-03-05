@@ -9,7 +9,8 @@ void build(){
 }
 void upd(int x, int y, int v){
 	st[x+n][y+m]=v;
-	for(int j=y+m;j>1;j>>=1)st[x+n][j>>1]=op(st[x+n][j],st[x+n][j^1]);
+	for(int j=y+m;j>1;j>>=1)
+		st[x+n][j>>1]=op(st[x+n][j],st[x+n][j^1]);
 	for(int i=x+n;i>1;i>>=1)for(int j=y+m;j;j>>=1)
 		st[i>>1][j]=op(st[i][j],st[i^1][j]);
 }
