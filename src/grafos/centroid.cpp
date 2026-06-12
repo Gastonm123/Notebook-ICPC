@@ -1,3 +1,4 @@
+int n;
 int sz[MAXN], ft[MAXN], tk[MAXN];
 void calcsz(int u, int p) {
     sz[u] = 1;
@@ -26,3 +27,13 @@ int dfs(int u, int p) {
         return dfs(pesado, u);
     }
 }
+int centroid_init() { // devuelve raiz del de centroides
+    forn (i,n) tk[i]=0;
+    int root=dfs(0,-1);
+    ft[root]=-1;
+    return root;
+}
+// hacer una vez al principio centroid_init() después de armar el grafo en g
+// guardar informacion del subarbol para cada centroide y responder queries
+// subiendo en el arbol de centroides
+// ft[u]: padre de u en el arbol de centroides

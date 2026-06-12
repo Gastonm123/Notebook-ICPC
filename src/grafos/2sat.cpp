@@ -52,4 +52,7 @@ struct TwoSatSolver{
         adj_t[b].pb(neg_a);
         adj_t[a].pb(neg_b);
     }
+    bool truth(int var) {
+        return assignment[var];
+    }
 };
