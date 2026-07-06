@@ -24,25 +24,6 @@ struct RMQ{
 			val=oper(t[p*2], t[p*2+1]);
 		}
 	}
-	// busqueda binaria en un mergesort tree
-	int search_for(int i, int j, Type target) { return search_for(i,j,1,0,sz,target); }
-    int search_for(int i, int j, int n, int a, int b, Type target) {
-        if (j<=a || i>=b) return -1;
-        if (b-a==1) {
-            if (t[n].s.find(target) != t[n].s.end()) return t[n].nodo;
-            return -1;
-        }
-        int c = (a+b)/2;
-        if (t[2*n+1].s.find(target) != t[2*n+1].s.end()) {
-            int r = search_for(i,j,2*n+1,c,b,target);
-            if (r!=-1) return r;
-        }
-        if (t[2*n].s.find(target) != t[2*n].s.end()) {
-            int r = search_for(i,j,2*n,a,c,target);
-            if (r!=-1) return r;
-        }
-        return -1;
-    }
 }rmq;
 // Usage:
 cin >> n; rmq.init(n); forn(i, n) cin >> rmq[i]; rmq.updall();
