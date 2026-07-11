@@ -46,3 +46,5 @@ struct Dinic{
 		return result;
 	}
 };
+//Para conocer aristas del min_cut: tirar dfs desde src donde la arista e la visito si cap(e)>flow(e). Las aristas que unan
+//nodos no visitados con nodos visitados son las del min_cut.
