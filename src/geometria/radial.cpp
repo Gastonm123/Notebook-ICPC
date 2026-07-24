@@ -2,10 +2,10 @@ struct Radial {
     Pt o;
     Radial(Pt _o) : o(_o) {}
     int cuad(Pt p) {
-        if (p.x>0 && p.y>=0) return 1;
-        if (p.x<=0 && p.y>0) return 2;
-        if (p.x<0 && p.y<=0) return 3;
-        if (p.x>=0 && p.y<0) return 4;
+        if (p.x>EPS && p.y>=-EPS) return 1;
+        if (p.x<=EPS && p.y>EPS) return 2;
+        if (p.x<-EPS && p.y<=EPS) return 3;
+        if (p.x>=-EPS && p.y<-EPS) return 4;
         assert(p.x == 0 && p.y == 0);
         return 0; // origen < todos
     }
