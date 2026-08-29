@@ -19,5 +19,18 @@ double reduce(vector<vector<double>> &a){  //Devuelve determinante si m == n
 	}
 	return r;
 }
-// En una matriz binaria podemos restar haciendo xor y no es necesario
-// normalizar las filas
+vector<int> reduce2(vector<bitset<MAXN>> &a) {
+	vector<int> pivots;
+	forn (i, sz(a)) {
+		for (int p : pivots) a[i]=min(a[i],a[i]^a[p]);
+		if (a[i].any()) {
+			// restar fila a los pivots
+			for (int p : pivots) a[p]=min(a[p],a[p]^a[i]);
+			// insertar manteniendo el orden
+			forn (j, sz(pivots)+1)
+				if (j==sz(pivots) || a[i]>a[pivots[j]]) 
+					pivots.insert(pivots.begin()+j,i);
+		}
+	}
+	return pivots;
+}
