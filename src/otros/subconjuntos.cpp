@@ -7,3 +7,4 @@ for(int bm=0; bm<(1<<n); bm++)
     for(int sbm=bm; sbm; sbm=(sbm-1)&(bm))
 // para superconjuntos (que contienen a bm),
 // negar la mascara: bm=~bm
+
