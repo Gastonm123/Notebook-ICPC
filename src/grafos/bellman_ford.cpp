@@ -1,4 +1,4 @@
-const int INF=2e9; int n;
+const ll INF=1e18; int n;
 vector<pair<int,int> > g[MAXN]; // u->[(v,cost)]
 ll dist[MAXN];
 void bford(int src){ // O(nm)
