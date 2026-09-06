@@ -14,6 +14,7 @@ void bford(int src){ // O(nm)
             // node, go up from t.fst until repeating a node.
             // this node and all nodes between the two
             // occurences form a neg cycle
+			// prev[t.fst] = x; // save "prev" here too..
 		}
 	}
 }
