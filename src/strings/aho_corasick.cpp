@@ -1,9 +1,9 @@
 struct vertex {
 	map<char,int> next,go;
-	int p,link;
+	int p,link,prox_term;
 	char pch;
 	vector<int> leaf;
-	vertex(int p=-1, char pch=-1):p(p),pch(pch),link(-1){}
+	vertex(int p=-1, char pch=-1):p(p),pch(pch),link(-1),prox_term(-1){}
 };
 vector<vertex> t;
 void aho_init(){ //do not forget!!
@@ -32,4 +32,13 @@ int go(int v, char c){
 		if(t[v].next.count(c))t[v].go[c]=t[v].next[c];
 		else t[v].go[c]=v==0?0:go(get_link(v),c);
 	return t[v].go[c];
+}
+int get_term(int u){
+    if(t[u].prox_term == -1){
+        int link = get_link(u);
+        if(link == 0) t[u].prox_term = 0;
+        else if(t[link].leaf.size()) t[u].prox_term = link;
+        else t[u].prox_term = get_term(link);
+    }
+    return t[u].prox_term;
 }
