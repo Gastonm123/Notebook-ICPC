@@ -1,49 +1,82 @@
-%para compilar pdflatex main.text
+% Notebook para el regional: A4 horizontal, dos columnas, letra grande.
+% Compilar con: pdflatex main.tex (dos veces, para el indice)
 
-\documentclass[a4paper,11pt,landscape,twocolumn]{article}
+\documentclass[a4paper,10pt,landscape,twocolumn]{article}
+
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath, amssymb, amsthm}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usepackage[varqu,varl]{zi4} % Inconsolata: monoespaciada angosta y con negrita
+\usepackage{amsmath, amssymb}
 \usepackage{graphicx}
-\usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{geometry}
-\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{comment}
+\usepackage{hyperref}
 
-% Aumenta la separación entre columnas
-\setlength{\columnsep}{25pt}
+\geometry{left=12mm,right=8mm,top=16mm,bottom=10mm,headsep=4mm}
+\setlength{\columnsep}{12mm}
+\setlength{\columnseprule}{0.4pt}
 
-\geometry{left=20mm,right=20mm,top=20mm,bottom=20mm}
+% Header obligatorio ICPC
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{[UNR] - Para el regional elegimos nombre}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
 
-% Configuración del código en C++
+% Configuración código C++
 \lstset{
   language=C++,
-  basicstyle=\ttfamily\small,
-  keywordstyle=\color{blue}\bfseries,
+  basicstyle=\ttfamily\fontsize{9.5}{11}\selectfont,
+  keywordstyle=\color{blue!70!black}\bfseries,
   commentstyle=\color{gray}\itshape,
-  stringstyle=\color{red},
+  stringstyle=\color{red!70!black},
   numbers=left,
-  numberstyle=\tiny,
+  numberstyle=\tiny\color{gray},
   stepnumber=1,
-  numbersep=8pt,
+  numbersep=6pt,
   tabsize=4,
   showspaces=false,
   showstringspaces=false,
+  columns=fixed,
+  basewidth=0.5em,
+  keepspaces=true,
   breaklines=true,
-  breakatwhitespace=true,
-  columns=flexible
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  aboveskip=2pt,
+  belowskip=4pt,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {ü}{{\"u}}1 {Ü}{{\"U}}1
 }
 
-\title{Notebook}
-\author{Para el regional elegimos nombre}
+\titleformat{\section}
+  {\bfseries\large}
+  {\thesection}
+  {0.5em}
+  {}
+
+\titleformat{\subsection}
+  {\bfseries\normalsize}
+  {\thesubsection}
+  {0.5em}
+  {}
+
+\titlespacing*{\section}{0pt}{1.2ex}{0.6ex}
+\titlespacing*{\subsection}{0pt}{1ex}{0.3ex}
+
 
 \begin{document}
-
-\begin{center}
-    \LARGE\textbf{Notebook}\\[1em]
-    \large Para el regional elegimos nombre\\[1em]
-    \normalsize \today\\[1em]
-\end{center}
 
 \tableofcontents
 \newpage
@@ -77,6 +110,12 @@
 \lstinputlisting{src/estructuras/chull_trick.cpp}
 \subsection{Chull Trick Dinámico}
 \lstinputlisting{src/estructuras/chull_trick_dynamic.cpp}
+\subsection{Li Chao Tree}
+\lstinputlisting{src/estructuras/li_chao_tree.cpp}
+\subsection{Descenso por el ST}
+\lstinputlisting{src/estructuras/descend.cpp}
+\subsection{ST iterativo}
+\lstinputlisting{src/estructuras/segment_tree_iterativo.cpp}
 
 \section{Matemática} % MATEMATICA
 \subsection{Criba Lineal}
@@ -102,6 +141,10 @@
 \lstinputlisting{src/matematica/gauss.cpp}
 \subsection{FFT}
 \lstinputlisting{src/matematica/fft.cpp}
+\subsection{Phi y Orden}
+\lstinputlisting{src/matematica/phi_orden.cpp}
+\subsection{Möbius}
+\lstinputlisting{src/matematica/mobius.cpp}
 
 \section{Geometria} % GEOMETRIA
 \subsection{Punto}
@@ -122,6 +165,10 @@
 \lstinputlisting{src/geometria/kdtree.cpp}
 \subsection{Suma de Minkowski}
 \lstinputlisting{src/geometria/minkowski_sum.cpp}
+\subsection{Halfplane intersection}
+\lstinputlisting{src/geometria/halfplanes.cpp}
+\subsection{Intercircles}
+\lstinputlisting{src/geometria/intercircles.cpp}
 
 \section{Strings} % STRINGS
 \subsection{Hashing}
@@ -138,6 +185,8 @@
 \lstinputlisting{src/strings/lyndon.cpp}
 \subsection{Trie}
 \lstinputlisting{src/strings/trie.cpp}
+\subsection{Aho-Corasick}
+\lstinputlisting{src/strings/aho_corasick.cpp}
 \subsection{Suffix Automaton}
 \lstinputlisting{src/strings/suffix_automaton.cpp}
 
@@ -145,9 +194,9 @@
 \subsection{Dikjstra}
 \lstinputlisting{src/grafos/dikjstra.cpp}
 \subsection{LCA}
-\lstinputlisting{src/grafos/lowest_common_ancestor.cpp}
-\subsection{Binary Lifting}
-\lstinputlisting{src/grafos/binary_lifting.cpp}
+\lstinputlisting{src/grafos/lca.cpp}
+% \subsection{Binary Lifting}
+% \lstinputlisting{src/grafos/binary_lifting.cpp}
 \subsection{Toposort}
 \lstinputlisting{src/grafos/toposort.cpp}
 \subsection{Deteccion ciclos negativos}
@@ -178,6 +227,14 @@
 \lstinputlisting{src/grafos/2sat.cpp}
 \subsection{K Colas}
 \lstinputlisting{src/grafos/kcolas.cpp}
+\subsection{Arborescence}
+\lstinputlisting{src/grafos/arborescence.cpp}
+\subsection{Blossom}
+\lstinputlisting{src/grafos/blossom.cpp}
+\subsection{Hash de Arboles}
+\lstinputlisting{src/grafos/treeHash.cpp}
+\subsection{Virtual Tree}
+\lstinputlisting{src/grafos/virtualTree.cpp}
 
 \section{Flujo} % FLUJO
 \subsection{Dinic}
@@ -198,13 +255,15 @@
 \lstinputlisting{src/optimizacion/ternary_search.cpp}
 \subsection{Longest Increasing Subsequence}
 \lstinputlisting{src/optimizacion/lis.cpp}
+\subsection{Simulated Annealing}
+\lstinputlisting{src/optimizacion/simulated_annealing.cpp}
 
 \section{Otros} % OTROS
 \subsection{Mo}
 \lstinputlisting{src/otros/mo.cpp}
 \subsection{Divide and Conquer Optimization}
 \lstinputlisting{src/otros/dyc_optimization.cpp}
-\subsection{Fijar el numero de decimales}
+\subsection{Fijar el Numero de Decimales}
 \lstinputlisting{src/otros/decimales.cpp}
 \subsection{Hash Table (Unordered Map/ Unordered Set)}
 \lstinputlisting{src/otros/hash_table.cpp}
@@ -218,6 +277,13 @@
 \lstinputlisting{src/otros/pragmas.cpp}
 \subsection{Random}
 \lstinputlisting{src/otros/random.cpp}
-\subsection{Utilidades de strings}
+\subsection{Utilidades de Strings}
 \lstinputlisting{src/otros/utilidades_str.cpp}
+\subsection{Sumas Parciales}
+\lstinputlisting{src/otros/sumasParciales.cpp}
+
+\newpage
+\input{apendice.tex}
+
+
 \end{document}
