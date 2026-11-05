@@ -42,7 +42,7 @@ template<class Char=char>class SuffixAutomaton {
 	void dfs(int curr=0) {
 		terminal_paths_from[curr] = term[curr];
 		paths_from[curr] = 1;
-		fore(edge, next[curr]) {
+		for (auto& edge : next[curr]) {
 			int other = edge.snd;
 			if (!paths_from[other]) {dfs(other);}
 			terminal_paths_from[curr] += terminal_paths_from[other];
@@ -78,7 +78,7 @@ public:
 	str txt; // Original string.
 	SuffixAutomaton(str const& _txt) {
 		int last = 0;
-		fore(c, _txt) {extend(c, last);}
+		for (auto& c : _txt) {extend(c, last);}
 		compute(last); terminal_paths_from.resize(size);
 		paths_from.resize(size); substrings_from.resize(size); dfs();
 	}
@@ -109,7 +109,7 @@ public:
 			while (!st.empty()) {
 				int curr = st.top(); st.pop();
 				occs.pb(firstpos[curr] + 1 - m);
-				fore(child, inv_link[curr]) {st.push(child);}
+				for (auto& child : inv_link[curr]) {st.push(child);}
 			}
 		}
 		// sort(all(occs)); occs.erase(unique(all(occs)), occs.end());

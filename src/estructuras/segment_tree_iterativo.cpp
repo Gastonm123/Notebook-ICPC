@@ -19,6 +19,6 @@ struct STree{
 };
 // init (put inside struct)
 void init(vector<node>a){
-    fore(i,0,n)t[n+i]=a[i];
+    forn(i,n)t[n+i]=a[i];
     for(ll i=n-1;i>0;i--)t[i]=oper(t[2*i],t[2*i+1]);
 }
